@@ -1,6 +1,8 @@
 \documentclass[graybox, reqno]{svmono}
+\let\proof\relax
+\let\endproof\relax
 \usepackage{graphicx}
-\usepackage{amsfonts,amssymb,latexsym,amsmath}
+\usepackage{amsthm, amsfonts, amssymb, latexsym, amsmath}
 \usepackage{tikz-cd}
 \usepackage{type1cm}
 \usepackage{makeidx}
@@ -8,7 +10,6 @@
 \usepackage{multicol}        
 \usepackage{nicefrac}
 \usepackage{lineno}
-\usepackage{mathrsfs}
 \usepackage{enumerate}
 \usepackage{mathrsfs}
 \usepackage[T1]{fontenc}
@@ -65,6 +66,7 @@
 \newcommand{\idealA}{\mathfrak{A}}
 \newcommand{\idealB}{\mathfrak{B}}
 \newcommand{\idealF}{\mathfrak{F}}
+\newcommand{\idealI}{\mathfrak{I}}
 \newcommand{\idealm}{\mathfrak{m}}
 \newcommand{\s}{\mathcal{S}}
 \newcommand{\C}{\mathfrak{C}}
@@ -120,27 +122,14 @@ The rings we will be working with throughout this short manuscript will be commu
 \end{align*}
 \end{definition}
 
-A subset $\ideala$ of a ring $A$ is called an \textbf{ideal} if it satisfies that for every $x, y\in \ideala$, then $x+y \in \ideala$, and if $x \in \ideala$ and $r \in R$, then $xr \in \ideala$. 
-\subsection{Ideals and Factor Rings:}
-
-\begin{definition} Let $R$ be a commutative ring. A nonempty subset $I$ of $R$ is called an \textup{\textbf{ideal}} of $R$ if
-\begin{itemize}
-\item[\textup{(i)}] $a \pm b \in I$ for all $a, b \in I$, and
-\item[\textup{(ii)}]$ra \in I$ for all $a \in I$ and $r \in R$. 
-\end{itemize}
-\end{definition}
-\begin{remark} \textup{ For any commutative ring $R$, it is clear that the set $\{ 0 \}$ is an ideal of $R$, which we will refer to as the \textup{\textbf{trivial}} ideal. The set $R$ is also always an ideal of $R$; we say that is not a \textit{proper} ideal since it is not a proper subset of $R$. }
-\end{remark} 
-\begin{definition} An ideal $I$ of an ring $R$ is called a
-\textup{\textbf{proper ideal}} of $R$ if $I \neq \langle 0 \rangle, \langle 1 \rangle$. 
-\end{definition} 
-\begin{remark}[Ideals versus subrings] It is worthwhile to compare these two notions;
-they are related, but with subtle and important differences. Both an ideal I and
-a subring $S$ of a ring $R$ are subsets of $R$ which are subgroups under addition and
+A subset $\ideala$ of a ring $A$ is called an \textbf{ideal} if it satisfies that for every $x, y\in \ideala$, then $x+y \in \ideala$, and if $x \in \ideala$ and $r \in A$, then $xr \in \ideala$.  For any commutative ring $A$, it is clear that the set $\{ 0 \}$ is an ideal of $A$, which we will refer to as the \textup{\textbf{trivial}} ideal. The set $A$ is also always an ideal of $A$; we say that is not a \textit{proper} ideal since it is not a proper subset of $A$. 
+\subsection*{Ideals and Factor Rings}
+It is worthwhile to compare these two notions of an ideal of a ring and a subring;
+they are related, but with subtle and important differences. Both an ideal $\ideala$ and
+a subring $S$ of a ring $A$ are subsets of $A$ which are subgroups under addition and
 are stable under multiplication. However, each has an additional property: for an
-ideal it is the absorption property (ii). For instance, the integers $\zz$ are a subring
-of the rational numbers $\qq$, but are clearly not an ideal, since $1/2 · 1 = 1/2$ , which is not an integer. On the other hand a subring has a property that an ideal usually lacks, namely it must contain the unity $1$ of $R$. For instance, the subset $2\zz = \{ 2n | n \in \zz \}$ is an ideal of $\zz$ but is not a subring
-\end{remark} 
+ideal it is the absorption property, i.e., $xr \in \ideala$ for all $x \in \ideala$ and $r \in A$. For instance, the integers $\zz$ are a subring
+of the rational numbers $\qq$, but are clearly not an ideal, since $1/2 · 1 = 1/2$ , which is not an integer. On the other hand a subring has a property that an ideal usually lacks, namely it must contain the unity $1$ of $R$. For instance, the subset $2\zz = \{ 2n | n \in \zz \}$ is an ideal of $\zz$ but is not a subring. 
 \begin{definition} Let $I$ be an ideal of a ring $R$. A \textup{\textbf{coset}} of $I$ is a set of the form \[a + I = \{ a + i \mid i \in I \}, \] where $a \in R$. The element $a$ is called a \textup{\textbf{representative}} of the coset $a+I$. 
 \end{definition} 
 \begin{theorem}[Basic Properties of Cosets] Let $I$ be an ideal of a ring $R$. Let $a, b \in R$. Then the cosets of $I$ have the following basic properties: 
@@ -151,7 +140,8 @@ of the rational numbers $\qq$, but are clearly not an ideal, since $1/2 · 1 = 1
 \item[4. ] the two cosets $a+I$ and $b+I$ are either disjoint or equal.
 \end{itemize}
 \end{theorem}
-\begin{proof} (1.) Suppose $a+I = I$. So we want to show that $a \in I$, and so we proceed as follows: Since $a + I = I$, then $a$ must be zero since $0+I = \{ 0+ i = i \mid i \in I \}$. Moreover, since $0 \in I$ --- easily seen by property (ii) --- then $a= 0 \in I$. Conversely, suppose $a \in I$. Our goal now is to show that both sets are contained in one another, i.e., $a+I \subseteq I$ and $I \subseteq a + I$. Take $a + b \in a+ I$, where $b \in I$. We need to show that $a+ b \in I$. But $I$ is an ideal, and bot h$a$ and $b$ are elements of $I$, so $a+b \in I$. Thus $a+I \subseteq I$. On the other hands, let $c \in I$. We must sow that $c \in a +I$. Since $I$ is an ideal, $-a \in I$, and so $c-a \in I$. Hence, we have $c = a+ (c-a) \in a+I$, as desired. Thus, $I \subseteq a +I$. We can now conclude that $a+I =I$.
+\begin{proof}
+ (1.) Suppose $a+I = I$. So we want to show that $a \in I$, and so we proceed as follows: Since $a + I = I$, then $a$ must be zero since $0+I = \{ 0+ i = i \mid i \in I \}$. Moreover, since $0 \in I$ --- easily seen by property (ii) --- then $a= 0 \in I$. Conversely, suppose $a \in I$. Our goal now is to show that both sets are contained in one another, i.e., $a+I \subseteq I$ and $I \subseteq a + I$. Take $a + b \in a+ I$, where $b \in I$. We need to show that $a+ b \in I$. But $I$ is an ideal, and bot h$a$ and $b$ are elements of $I$, so $a+b \in I$. Thus $a+I \subseteq I$. On the other hands, let $c \in I$. We must sow that $c \in a +I$. Since $I$ is an ideal, $-a \in I$, and so $c-a \in I$. Hence, we have $c = a+ (c-a) \in a+I$, as desired. Thus, $I \subseteq a +I$. We can now conclude that $a+I =I$.
 
 (2.) First, we assume that $a + I = b + I$. Since
 \[ a = a + 0 \in a + I = b + I ,\]
@@ -160,7 +150,7 @@ since $i + c \in I$. Thus, $a + I \subseteq b + I$. At this stage we could prove
 
 (3.) Follows directly from the preceding two proposition.
 
-(4.) Suppose $a+I$ and $b+I$ are not disjoint, i.e., $(a+I) \cap (b+I) \neq \varnothing$. Then $a+ I$ and $b+I$ have a common element; let $x$ denote that element. Then we can write $x= a+i$, for some $i \in I$, and also write $x = b+j$, for some $j \in I$. Thus $x = a+i = b+j = x$, and so $a-b = j-i \in I $ since $j, i \in I$ and $j-i \in I$ (closure). By (2.), $a-b \in I$ implies that $a + I = b+I$, and therefore the two cosets are equivalent. We can conclude that if these two cosets are not disjoint, then they are equal.
+(4.) Suppose $a+I$ and $b+I$ are not disjoint, i.e., $(a+I) \cap (b+I) \neq \varnothing$. Then $a+ I$ and $b+I$ have a common element; let $x$ denote that element. Then we can write $x= a+i$, for some $i \in I$, and also write $x = b+j$, for some $j \in I$. Thus $x = a+i = b+j = x$, and so $a-b = j-i \in I $ since $j, i \in I$ and $j-i \in I$ (closure). By (2.), $a-b \in I$ implies that $a + I = b+I$, and therefore the two cosets are equivalent. We can conclude that if these two cosets are not disjoint, then they are equal. 
 \end{proof}
 \begin{proposition} Let $R$ be a commutative ring with $1 \neq 0$. Then $R$ is a field if and only if it has no proper nontrivial ideals.
 \end{proposition} 
